@@ -45,14 +45,6 @@ impl StudentDataTrait for Database {
         }
     }
 
-    // async fn delete_student(db: &Data<Database>, student_id: String) -> Result<(), Error> {
-    //     let result = db.client.delete(("student", student_id)).await;
-    //     match result {
-    //         Ok(_) => Ok(()),
-    //         Err(_) => Ok(()),
-    //     }
-    // }
-
     async fn delete_student(db: &Data<Database>, student_id: String) -> Result<(), Error> {
         let result: Result<(Option<Students>), Error> = db.client.delete::<_>(("student", student_id)).await;
         println!("{:?}", result);
@@ -61,33 +53,5 @@ impl StudentDataTrait for Database {
             Err(err) => Err(err.into()), // Convert SurrealDB error to the appropriate error type
         }
     }
-
-    // async fn update_pizza(db: &Data<Database>, uuid: String) -> Option<Pizza> {
-    //     let find_pizza: Result<Option<Pizza>, Error> = db.client.select(("pizza", &uuid)).await;
-
-    //     match find_pizza {
-    //         Ok(found) => {
-    //             match found {
-    //                 Some(_found_pizza) => {
-    //                     let updated_pizza: Result<Option<Pizza>, Error> = db
-    //                         .client
-    //                         .update(("pizza", &uuid))
-    //                         .merge(Pizza {
-    //                             uuid,
-    //                             pizza_name: String::from("Sold")
-    //                         })
-    //                         .await;
-    //                     match updated_pizza {
-    //                         Ok(updated) => updated,
-    //                         Err(_) => None,
-    //                     }
-    //                 },
-    //                 None => None,
-    //             }
-    //         },
-    //         Err(_) => None,
-    //     }
-    // }
-
 
 }
